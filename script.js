@@ -28,17 +28,21 @@ function checkIfOut() {
 
 handleStart = function(e) {
     e.preventDefault();
-    startX = e.pageX;
+    startEvent == 'mousedown' ? startX = e.pageX : startX = e.touches[0].pageX;
     target.addEventListener(moveEvent, handleMove, false);
 }
 
 handleMove = function(e) {
     e.preventDefault();
-    var currentX = e.pageX,
-        currentDistance = Math.abs(currentX - startX),
+
+    var currentX;
+
+    startEvent == 'mousedown' ? currentX = e.pageX : currentX = e.touches[0].pageX;
+
+    var currentDistance = Math.abs(currentX - startX),
         position = [bgX + "px","0"];
         currentTime = e.timeStamp
-        
+
         if ((currentX > startX) && (currentDistance > maxDistance)) {
             // swipe right code here
             bgX = currentDistance * (-520);
