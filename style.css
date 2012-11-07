@@ -1,8 +1,7 @@
 
 #car {
 	background:url(images/carsprite.jpg) 0 0 repeat-x;
-	background-size: 17680px 170px;
-	border:1px solid black;
+	background-size: auto 170px;
 	display:block;
 	height:170px;
 	width:520px;

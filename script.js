@@ -1,5 +1,5 @@
 var target = document.getElementById("car");
-var maxDistance = 10;  // swipe movement of 10 pixels triggers the swipe
+  // swipe movement of 10 pixels triggers the swipe
 var startX;
 var bgX;
 var startEvent = 'createTouch' in document || 'onTouchStart' in window ? 'touchstart' : 'mousedown';
@@ -7,22 +7,6 @@ var moveEvent = 'createTouch' in document || 'onTouchStart' in window ? 'touchmo
 var endEvent = 'createTouch' in document || 'onTouchStart' in window ? 'touchend' : 'mouseup';
 var inWin = 0; 
 
-// kill moveEvent if the cursor leaves the window 
-// (so an unclicked mouse won't spin the car when you enter the window again)
-
-window.onmouseout = function(e) {
-   inWin--;
-   setTimeout(checkIfOut, 1);
-}
-window.onmouseover = function(e) {
-   inWin++;
-}
-
-function checkIfOut() {
-   if (!inWin) {
-     target.removeEventListener(moveEvent, handleMove, false);
-   }
-}
 
 // END "in Window?" test
 
@@ -39,17 +23,17 @@ handleMove = function(e) {
 
     startEvent == 'mousedown' ? currentX = e.pageX : currentX = e.touches[0].pageX;
 
-    var currentDistance = Math.abs(currentX - startX),
+    var currentDistance = Math.round(Math.abs(currentX - startX)/10),
         position = [bgX + "px","0"];
         currentTime = e.timeStamp
 
-        if ((currentX > startX) && (currentDistance > maxDistance)) {
+        if (currentX > startX) {
             // swipe right code here
             bgX = currentDistance * (-520);
             target.style.backgroundPosition = position.join(" ");
         }
 
-        if ((currentX < startX) && (currentDistance > maxDistance)) {
+        if (currentX < startX) {
             // swipe left code here
             bgX = currentDistance * 520;
             target.style.backgroundPosition = position.join(" ");
